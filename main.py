@@ -18,9 +18,9 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers (change as needed)
 )
 
-@app.post("/test")
+@app.get("/plot")
 async def test():
-    return FileResponse('test.png')
+    return FileResponse('plot.png')
 
 @app.post("/classifier")
 async def test(file: UploadFile):

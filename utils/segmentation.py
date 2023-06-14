@@ -12,7 +12,6 @@ class Segmentation:
         self.model = keras.models.load_model(model_path)
 
     def convert_image_to_array(self, image):
-        # image = Image.open(BytesIO(image)) #TODO: remove this
         resized_image = image.resize((150, 150))
         rgb_image = resized_image.convert('RGB')
         image_array = np.array(rgb_image)
@@ -20,7 +19,7 @@ class Segmentation:
         return image_array
 
     def get_segmented_image(self,image):
-        image = Image.open(BytesIO(image))
+        # image = Image.open(BytesIO(image))
         image = np.array(image)/255
         image_reshaped = image.reshape(-1, image.shape[-1])
 
@@ -48,12 +47,12 @@ class Segmentation:
         for ax in axs:
             ax.axis('off')
 
-        plt.savefig('segmented_image.png')
+        plt.savefig('plot.png')
 
         return segmented_img
 
     def make_prediction(self, image):
-        # image_array = self.get_segmented_image(image)
+        segmented_image = self.get_segmented_image(image)
         image_array = self.convert_image_to_array(image)
         image_array = np.expand_dims(image_array, axis=0)
         prediction = self.model.predict(image_array)

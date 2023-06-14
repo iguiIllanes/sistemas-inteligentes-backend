@@ -26,7 +26,7 @@ class Classifier:
         image_array = self.convert_image_to_array(image)
         # make_graphic(image_array)
         plt.imshow(image_array)
-        plt.savefig('test.png')
+        plt.savefig('plot.png')
         image_array = np.expand_dims(image_array, axis=0)
         prediction = self.model.predict(image_array)
         print('Prediccion: ',prediction[0][0])
